@@ -87,12 +87,14 @@ int handle__pubrel(struct mosquitto *mosq)
 		return rc;
 	}
 
-	rc = send__pubcomp(mosq, mid, NULL);
+	// rc = send__pubcomp(mosq, mid, NULL);
+	rc = MOSQ_ERR_SUCCESS;
 	if(rc) return rc;
 #else
 	log__printf(mosq, MOSQ_LOG_DEBUG, "Client %s received PUBREL (Mid: %d)", mosq->id, mid);
 
-	rc = send__pubcomp(mosq, mid, NULL);
+	// rc = send__pubcomp(mosq, mid, NULL);
+	rc = MOSQ_ERR_SUCCESS;
 	if(rc){
 		message__remove(mosq, mid, mosq_md_in, &message, 2);
 		return rc;
